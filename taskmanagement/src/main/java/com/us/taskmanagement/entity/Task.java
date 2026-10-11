@@ -1,5 +1,7 @@
 package com.us.taskmanagement.entity;
 
+import com.us.taskmanagement.enums.TaskPriority;
+import com.us.taskmanagement.enums.TaskStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,17 +20,25 @@ public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "task_id")
     private Long id;
 
     private String title;
 
     private String description;
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private TaskStatus status;
 
-    private String priority;
+    @Enumerated(EnumType.STRING)
+    private TaskPriority priority;
 
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "project_id", nullable = false)
+    private Project project;
+
 }

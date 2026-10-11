@@ -1,19 +1,22 @@
 package com.us.taskmanagement.service;
 
-import com.us.taskmanagement.dto.RequestTask;
-import org.springframework.http.HttpStatusCode;
+import com.us.taskmanagement.dto.TaskRequest;
+import com.us.taskmanagement.dto.TaskResponse;
+import com.us.taskmanagement.entity.Task;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 public interface TaskService {
 
+    TaskResponse addTask(TaskRequest request);
 
-    Object addTask(RequestTask task);
+    Page<TaskResponse> getAllTask(Pageable pageable);
 
-    Object getAllTask();
+    TaskResponse findById(Long id);
 
-    Object findById(Long id);
+    TaskResponse updateById(Long id, TaskRequest request);
 
-    Object updateById(Long id);
-
-
-    Object deleteById(Long id);
+    TaskResponse deleteById(Long id);
 }
